@@ -1,0 +1,3 @@
+/Users/joshuazamora/Desktop/Computer Science/Projects/Expense Tracker/build/CMakeFiles/expense-tracker.dir
+/Users/joshuazamora/Desktop/Computer Science/Projects/Expense Tracker/build/CMakeFiles/edit_cache.dir
+/Users/joshuazamora/Desktop/Computer Science/Projects/Expense Tracker/build/CMakeFiles/rebuild_cache.dir

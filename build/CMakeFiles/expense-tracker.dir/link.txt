@@ -1,0 +1,1 @@
+/usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names "CMakeFiles/expense-tracker.dir/src/main.cpp.o" "CMakeFiles/expense-tracker.dir/src/ExpenseRepository.cpp.o" "CMakeFiles/expense-tracker.dir/src/ExpenseService.cpp.o" "CMakeFiles/expense-tracker.dir/src/CommandParser.cpp.o" "CMakeFiles/expense-tracker.dir/src/DateUtils.cpp.o" -o expense-tracker
