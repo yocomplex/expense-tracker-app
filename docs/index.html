@@ -5,245 +5,128 @@
   <title>C++ WebAssembly Expense Tracker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 20px;
-      background: #f7f7f7;
-      color: #222;
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
-    h1 {
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      color: #555;
-      margin-bottom: 24px;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    }
-
-    input, button, select {
-      padding: 10px;
-      margin: 6px 4px 6px 0;
-      font-size: 14px;
-    }
-
-    button {
-      cursor: pointer;
-      border: none;
-      border-radius: 8px;
-      background: #222;
-      color: white;
-    }
-
-    button.secondary {
-      background: #555;
-    }
-
-    button.danger {
-      background: #b00020;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-    }
-
-    th, td {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background: #eee;
-    }
-
-    .summary {
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .message {
-      margin-top: 10px;
-      color: #0a6;
-    }
-
-    .error {
-      color: #b00020;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-  <h1>C++ Expense Tracker running in WebAssembly</h1>
-  <p class="subtitle">
-    The app logic is written in C++, compiled to WebAssembly with Emscripten, and hosted on GitHub Pages.
-  </p>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">C++ · WebAssembly · GitHub Pages</p>
+        <h1>Expense Tracker</h1>
+        <p class="hero-text">
+          A modern expense tracker powered by C++ logic compiled to WebAssembly.
+        </p>
+      </div>
 
-  <div class="card">
-    <h2>Add Expense</h2>
-    <input id="description" placeholder="Description" />
-    <input id="amount" type="number" step="0.01" placeholder="Amount" />
-    <input id="category" placeholder="Category" value="General" />
-    <button onclick="addExpense()">Add</button>
-    <p id="message" class="message"></p>
-  </div>
+      <div class="hero-card">
+        <span>Total Expenses</span>
+        <strong>$<span id="total">0.00</span></strong>
+      </div>
+    </section>
 
-  <div class="card">
-    <h2>Summary</h2>
-    <p class="summary">Total: $<span id="total">0.00</span></p>
+    <section class="grid">
+      <div class="card">
+        <div class="card-header">
+          <h2>Add Expense</h2>
+          <p>Track a new purchase or payment.</p>
+        </div>
 
-    <select id="month">
-      <option value="1">January</option>
-      <option value="2">February</option>
-      <option value="3">March</option>
-      <option value="4">April</option>
-      <option value="5">May</option>
-      <option value="6">June</option>
-      <option value="7">July</option>
-      <option value="8">August</option>
-      <option value="9">September</option>
-      <option value="10">October</option>
-      <option value="11">November</option>
-      <option value="12">December</option>
-    </select>
+        <div class="form-grid">
+          <label>
+            Description
+            <input id="description" placeholder="Lunch" />
+          </label>
 
-    <button class="secondary" onclick="showMonthlySummary()">Monthly Summary</button>
-    <p id="monthlyTotal"></p>
-  </div>
+          <label>
+            Amount
+            <input id="amount" type="number" step="0.01" placeholder="20.00" />
+          </label>
 
-  <div class="card">
-    <h2>Expenses</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Date</th>
-          <th>Description</th>
-          <th>Amount</th>
-          <th>Category</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody id="expenseTable"></tbody>
-    </table>
+          <label>
+            Category
+            <input id="category" placeholder="Food" value="General" />
+          </label>
+        </div>
 
-    <br />
-    <button class="secondary" onclick="downloadCsv()">Download CSV</button>
-  </div>
+        <button class="button primary" onclick="addExpense()">Add Expense</button>
+        <p id="message" class="message"></p>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>Monthly Summary</h2>
+          <p>View total spending by month.</p>
+        </div>
+
+        <label>
+          Month
+          <select id="month">
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5" selected>May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </select>
+        </label>
+
+        <button class="button secondary" onclick="showMonthlySummary()">
+          Show Monthly Total
+        </button>
+
+        <p id="monthlyTotal" class="monthly-result"></p>
+      </div>
+    </section>
+
+    <section class="card table-card">
+      <div class="table-toolbar">
+        <div>
+          <h2>Expenses</h2>
+          <p>All expenses currently stored in the WebAssembly app state.</p>
+        </div>
+
+        <button class="button secondary" onclick="downloadCsv()">
+          Download CSV
+        </button>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Amount</th>
+              <th>Category</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="expenseTable"></tbody>
+        </table>
+      </div>
+
+      <p id="emptyState" class="empty-state">
+        No expenses yet. Add your first expense above.
+      </p>
+    </section>
+  </main>
 
   <script src="expense_tracker.js"></script>
-
-  <script>
-    let tracker = null;
-
-    Module.onRuntimeInitialized = () => {
-      tracker = new Module.ExpenseTracker();
-      render();
-    };
-
-    function setMessage(text, isError = false) {
-      const message = document.getElementById("message");
-      message.textContent = text;
-      message.className = isError ? "message error" : "message";
-    }
-
-    function addExpense() {
-      try {
-        const description = document.getElementById("description").value.trim();
-        const amount = Number(document.getElementById("amount").value);
-        const category = document.getElementById("category").value.trim();
-
-        const id = tracker.addExpense(description, amount, category);
-
-        document.getElementById("description").value = "";
-        document.getElementById("amount").value = "";
-        document.getElementById("category").value = "General";
-
-        setMessage(`Expense added successfully. ID: ${id}`);
-        render();
-      } catch (error) {
-        setMessage(error.message, true);
-      }
-    }
-
-    function deleteExpense(id) {
-      const deleted = tracker.deleteExpense(id);
-
-      if (deleted) {
-        setMessage("Expense deleted successfully.");
-      } else {
-        setMessage("Expense not found.", true);
-      }
-
-      render();
-    }
-
-    function render() {
-      const table = document.getElementById("expenseTable");
-      table.innerHTML = "";
-
-      const expenses = tracker.listExpenses();
-
-      for (let i = 0; i < expenses.size(); i++) {
-        const expense = expenses.get(i);
-
-        const row = document.createElement("tr");
-
-        row.innerHTML = `
-          <td>${expense.id}</td>
-          <td>${expense.date}</td>
-          <td>${expense.description}</td>
-          <td>$${expense.amount.toFixed(2)}</td>
-          <td>${expense.category}</td>
-          <td>
-            <button class="danger" onclick="deleteExpense(${expense.id})">Delete</button>
-          </td>
-        `;
-
-        table.appendChild(row);
-      }
-
-      document.getElementById("total").textContent =
-        tracker.getTotalSummary().toFixed(2);
-    }
-
-    function showMonthlySummary() {
-      try {
-        const month = Number(document.getElementById("month").value);
-        const total = tracker.getMonthlySummary(month);
-
-        document.getElementById("monthlyTotal").textContent =
-          `Monthly total: $${total.toFixed(2)}`;
-      } catch (error) {
-        document.getElementById("monthlyTotal").textContent = error.message;
-      }
-    }
-
-    function downloadCsv() {
-      const csv = tracker.exportCsv();
-      const blob = new Blob([csv], { type: "text/csv" });
-      const url = URL.createObjectURL(blob);
-
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "expenses.csv";
-      link.click();
-
-      URL.revokeObjectURL(url);
-    }
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
