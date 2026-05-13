@@ -1,0 +1,20 @@
+{
+  "configurations": [
+    {
+      "name": "Emscripten",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "${env:HOME}/emsdk/upstream/emscripten/system/include",
+        "${env:HOME}/emsdk/upstream/emscripten/cache/sysroot/include"
+      ],
+      "defines": [
+        "__EMSCRIPTEN__"
+      ],
+      "compilerPath": "${env:HOME}/emsdk/upstream/emscripten/em++",
+      "cppStandard": "c++17",
+      "cStandard": "c17",
+      "intelliSenseMode": "macos-clang-arm64"
+    }
+  ],
+  "version": 4
+}

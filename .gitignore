@@ -1,0 +1,7 @@
+build/
+cmake-build-*/
+*.o
+*.out
+*.exe
+.DS_Store
+data/expenses.csv
