@@ -16,7 +16,7 @@ Track expenses, view summaries, export CSV data, and explore how C++ can power a
 <br />
 
 ( [🌐 Live Demo](https://yocomplex.github.io/expense-tracker-app/) | 
-[📂 Repository](https://github.com/yocomplex/expense-tracker-app))
+[📂 Repository](https://github.com/yocomplex/expense-tracker-app) )
 
 </div>
 
